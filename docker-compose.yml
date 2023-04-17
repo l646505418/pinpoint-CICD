@@ -30,7 +30,18 @@ services:
       - HOSTAPPMAPV2_TTL=${HOSTAPPMAPV2_TTL}
     volumes:
       - hbase_data:/home/pinpoint/hbase
-      - /home/pinpoint/zookeeper
+      - /home/pinpoint/resource "docker_container" "myzookeeper" {
+        image = "bitnami/zookeeper:latest"
+        name  = "test-zookeeper"
+        ports {
+        internal = 2181
+        external = 2181
+        }
+        networks_advanced {
+        name="${docker_network.private_network.name}"
+        }
+        env=["ALLOW_ANONYMOUS_LOGIN=yes","ALLOW_PLAINTEXT_LISTENER=yes"]
+        }
     expose:
       # HBase Master API port
       - "60000"
