@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: hbase-local-config
+data:
+  PINPOINT_HBASE_NAME: pinpoint-hbase
+  EXTERNAL_HBASE_PORT: "2181"

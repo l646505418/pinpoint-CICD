@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    pinpoint.hbase.service: pinpoint-hbase
+  name: pinpoint-hbase-service
+spec:
+  ports:
+    - name: hbase-port
+      port: 2180
+      targetPort: EXTERNAL_HBASE_PORT
+    - name: hbase-master-api-port
+      port: 60000
+      targetPort: 60000
+    - name: hbase-master-web-ui
+      port: 16010
+      targetPort: 16010
+    - name: regionserver-api-port
+      port: 60020
+      targetPort: 16010
+    - name: hbase-regionserver-web-ui
+      port: 16030
+      targetPort: 16030
+  selector:
+    pinpoint.hbase.service: pinpoint-hbase

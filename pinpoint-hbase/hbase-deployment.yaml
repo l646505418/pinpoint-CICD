@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    pinpoint.hbase.service: pinpoint-hbase
+  name: pinpoint-hbase-deployment
+spec:
+  selector:
+    matchLabels:
+      pinpoint.hbase.service: pinpoint-hbase
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        pinpoint.hbase.service: pinpoint-hbase
+    spec:
+      containers:
+        - image: pinpointdocker/pinpoint-hbase
+          name: pinpoint-hbase-service
+          ImagePolicy: IfNotPresent
+          ports:
+            - name: hbase-port
+              containerPort: 2181
+            - name: master-api
+              containerPort: 60000
+            - name: master-web-ui
+              containerPort: 16010
+            - name: regionserver
+              containerPort: 60020
+            - name: region-web
+              containerPort: 16030
+      restartPolicy: Always
+

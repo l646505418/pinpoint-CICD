@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    pinpoint.hbase.service: pinpoint-hbase
+  name: pinpoint-hbase-pod-1
+spec:
+      containers:
+        - env:
+            - name: PINPOINT_VERSION
+              valueFrom:
+                configMapKeyRef:
+                  name: hbase-local-config
+                  key: PINPOINT_HBASE_NAME
+            - name: EXTERNAL_HBASE_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: hbase-local-config
+                  key: EXTERNAL_HBASE_PORT
+          image: pinpointdocker/pinpoint-hbase
+          name: pinpoint-hbase-service
+          imagePullPolicy: IfNotPresent
+
+
+      restartPolicy: Always
+
