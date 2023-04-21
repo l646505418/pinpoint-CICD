@@ -12,8 +12,14 @@ spec:
       envFrom:
         - configMapRef:
             name: pinpoint-quickstart-config
-      env:
-        - name: JAVA_OPTS
-          value:
+      volumeMounts:
+        - name: data-volume
+          mountPath: /pinpoint-agent
+
+  volumes:
+    - name: data-volume
+      hostPath:
+        path: /data-volume
+
 
   restartPolicy: Always
