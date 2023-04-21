@@ -6,8 +6,8 @@ metadata:
   name: pinpoint-quickstart-service
 spec:
   ports:
-    - name: hbase-port
-      port: 2180
-      targetPort: APP_PORT
+    - name: quickstart-port
+      port: APP_PORT
+      targetPort: 8080
   selector:
     pinpoint.quickstart.service: pinpoint-quickstart
