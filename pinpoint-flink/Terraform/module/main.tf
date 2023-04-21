@@ -27,7 +27,7 @@ resource "docker_container"  pinpoint-flink-job-manager{
     name = docker_network.flink-network.name
   }
   command = ["standalone-job","-p","1","pinpoint-flink-job.jar","-spring.profiles.active","release"]
-  env = ["JOB_MANAGER_RPC_ADDRESS=pinpoint-flink-job-manager","PINPOINT_ZOOKEEPER_ADDRESS=${var.PINPOINT_ZOOKEEPER_ADDRESS}"]
+  env = ["JOB_MANAGER_RPC_ADDRESS=jmr","PINPOINT_ZOOKEEPER_ADDRESS=${var.PINPOINT_ZOOKEEPER_ADDRESS}"]
 
 }
 
@@ -35,7 +35,7 @@ resource "docker_container"  pinpoint-flink-task-manager{
   image = docker_container.pinpoint-flink-job-manager.image
   name  = var.task_container_name
   command = ["taskmanager"]
-  env = ["JOB_MANAGER_RPC_ADDRESS=pinpoint-flink-job-manager"]
+  env = ["JOB_MANAGER_RPC_ADDRESS=jmr"]
   ports {
     internal = "6121"
     external = "6121"
