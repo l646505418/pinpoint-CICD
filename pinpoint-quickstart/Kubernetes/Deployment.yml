@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    pinpoint.quickstart.service: pinpoint-quickstart
+  name: pinpoint-quickstart-deployment
+spec:
+  selector:
+    matchLabels:
+      pinpoint.quickstart.service: pinpoint-quickstart
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        pinpoint.quickstart.service: pinpoint-quickstart
+    spec:
+      containers:
+        - image: pinpointdocker/pinpoint-quickstart
+          name: pinpoint-quickstart
+          ImagePolicy: IfNotPresent
+          ports:
+            - name: quickstart-port
+              containerPort: 8080
+      restartPolicy: Always

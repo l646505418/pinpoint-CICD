@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    pinpoint.quickstart.service: pinpoint-quickstart
+  name: pinpoint-quickstart-pod
+spec:
+  containers:
+    - image: pinpointdocker/pinpoint-quickstart
+      name: pinpoint-quickstart
+      imagePullPolicy: IfNotPresent
+      envFrom:
+        - configMapRef:
+            name: pinpoint-quickstart-config
+      env:
+        - name: JAVA_OPTS
+          value:
+
+  restartPolicy: Always
