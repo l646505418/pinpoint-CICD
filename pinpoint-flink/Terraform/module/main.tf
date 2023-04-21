@@ -37,26 +37,17 @@ resource "docker_container"  pinpoint-flink-task-manager{
   command = ["taskmanager"]
   env = ["JOB_MANAGER_RPC_ADDRESS=pinpoint-flink-job-manager"]
   ports {
-    internal = "2181"
-    external = "2181"
+    internal = "6121"
+    external = "6121"
   }
   ports {
-    internal = "60000"
-    external = "60000"
+    internal = "6122"
+    external = "6122"
   }
   ports {
-    internal = "16010"
-    external = "16010"
+    internal = "19994"
+    external = "19994"
   }
-  ports {
-    internal = "60020"
-    external = "60020"
-  }
-  ports {
-    internal = "16030"
-    external = "16030"
-  }
-
   networks_advanced {
     name = docker_network.flink-network.name
   }
