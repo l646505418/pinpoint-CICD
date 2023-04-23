@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    pinpoint.quickstart.service: pinpoint-quickstart
+  name: pinpoint-quickstart-pod
+spec:
+  containers:
+    - image: pinpointdocker/pinpoint-quickstart
+      name: pinpoint-quickstart
+      imagePullPolicy: IfNotPresent
+      envFrom:
+        - configMapRef:
+            name: pinpoint-quickstart-config
+      volumeMounts:
+        - name: data-volume
+          mountPath: /pinpoint-agent
+
+  volumes:
+    - name: data-volume
+      hostPath:
+        path: /data-volume
+
+
+  restartPolicy: Always

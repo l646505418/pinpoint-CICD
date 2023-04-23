@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: pinpoint-quickstart-config
+data:
+
+  #collector information required
+  COLLECTOR_IP:
+  PROFILER_TRANSPORT_AGENT_COLLECTOR_PORT: "9991"
+  PROFILER_TRANSPORT_METADATA_COLLECTOR_PORT: "9991"
+  PROFILER_TRANSPORT_STAT_COLLECTOR_PORT: "9992"
+  PROFILER_TRANSPORT_SPAN_COLLECTOR_PORT: "9993"
+
+  # Sampling Configurations
+  PROFILER_SAMPLING_TYPE: COUNTING
+  PROFILER_SAMPLING_COUNTING_SAMPLING_RATE: "1"
+  PROFILER_SAMPLING_PERCENT_SAMPLING_RATE: "100"
+  PROFILER_SAMPLING_NEW_THROUGHPUT: "0"
+  PROFILER_SAMPLING_CONTINUE_THROUGHPUT: "0"
+  AGENT_DEBUG_LEVEL: INFO
+  AGENT_ID: app-in-docker
+  APP_NAME: quickapp
+  PINPOINT_VERSION: 2.5.0
+  SPRING_PROFILES: release
+  JAVA_OPTS: -javaagent:/pinpoint-agent/pinpoint-bootstrap-${PINPOINT_VERSION}.jar -Dpinpoint.agentId=${AGENT_ID} -Dpinpoint.applicationName=${APP_NAME} -Dpinpoint.profiler.profiles.active=${SPRING_PROFILES}
+

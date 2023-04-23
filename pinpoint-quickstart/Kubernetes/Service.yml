@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    pinpoint.quickstart.service: pinpoint-quickstart
+  name: pinpoint-quickstart-service
+spec:
+  ports:
+    - name: quickstart-port
+      port: APP_PORT
+      targetPort: 8080
+  selector:
+    pinpoint.quickstart.service: pinpoint-quickstart
