@@ -17,11 +17,14 @@ spec:
       containers:
         - image: pinpointdocker/pinpoint-collector:PINPOINT_VERSION
           name: pinpoint-collector
-          ImagePolicy: IfNotPresent
+          imagePullPolicy: IfNotPresent
+          envFrom:
+            - configMapRef:
+                name: pinpoint-collector-config
           ports:
             - name: collector-agent
               containerPort: 9991
-            - name: ollector-stat
+            - name: collector-stat
               containerPort: 9992
             - name: collector-span
               containerPort: 9993

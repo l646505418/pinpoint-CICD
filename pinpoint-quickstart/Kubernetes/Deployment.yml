@@ -17,8 +17,19 @@ spec:
       containers:
         - image: pinpointdocker/pinpoint-quickstart
           name: pinpoint-quickstart
-          ImagePolicy: IfNotPresent
+          imagePullPolicy: IfNotPresent
+          envFrom:
+            - configMapRef:
+                name: pinpoint-quickstart-config
+          volumeMounts:
+            - name: data-volume
+              mountPath: /pinpoint-agent
           ports:
             - name: quickstart-port
               containerPort: 8080
+      volumes:
+        - name: data-volume
+          hostPath:
+            path: /data-volume
+
       restartPolicy: Always

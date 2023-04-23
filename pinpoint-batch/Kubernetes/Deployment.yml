@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    pinpoint.batch.service: pinpoint-batch
+  name: pinpoint-batch-deployment
+spec:
+  selector:
+    matchLabels:
+      pinpoint.batch.service: pinpoint-batch
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        pinpoint.batch.service: pinpoint-batch
+    spec:
+      containers:
+        - image: pinpointdocker/pinpoint-batch:PINPOINT_VERSION
+          name: pinpoint-batch
+          imagePullPolicy: IfNotPresent
+          envFrom:
+            - configMapRef:
+                name: pinpoint-batch-config
+          ports:
+            - containerPort: 8079
+      restartPolicy: Always
