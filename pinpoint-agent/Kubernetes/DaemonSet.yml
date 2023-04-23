@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  labels:
+    pinpoint.agent.service: pinpoint-agent
+  name: pinpoint-agent-DaemonSet
+spec:
+  selector:
+    matchLabels:
+      pinpoint.agent.service: pinpoint-agent
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        pinpoint.agent.service: pinpoint-agent
+    spec:
+      containers:
+        - image: pinpointdocker/pinpoint-agent:PINPOINT_VERSION
+          name: pinpoint-agent
+          ImagePolicy: IfNotPresent
+      restartPolicy: Always
