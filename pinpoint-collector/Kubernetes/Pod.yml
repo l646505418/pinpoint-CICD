@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    pinpoint.collector.service: pinpoint-collector
+  name: pinpoint-collector-pod
+spec:
+  containers:
+    - image: pinpointdocker/pinpoint-collector:PINPOINT_VERSION
+      name: pinpoint-collector
+      imagePullPolicy: IfNotPresent
+      envFrom:
+        - configMapRef:
+            name: pinpoint-collector-config
+  restartPolicy: Always
