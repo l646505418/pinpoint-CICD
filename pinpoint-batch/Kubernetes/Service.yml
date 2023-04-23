@@ -7,7 +7,7 @@ metadata:
 spec:
   ports:
     - name: batch-server
-      port: COLLECTOR_RECEIVER_GRPC_AGENT_PORT
+      port: BATCH_SERVER_PORT
       targetPort: 8079
   selector:
     pinpoint.batch.service: pinpoint-batch
