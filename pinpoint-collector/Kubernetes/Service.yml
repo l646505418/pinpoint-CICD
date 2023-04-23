@@ -1,0 +1,44 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    pinpoint.collector.service: pinpoint-collector
+  name: pinpoint-collector-service
+spec:
+  ports:
+    - name: collector-agent-s
+      port: COLLECTOR_RECEIVER_GRPC_AGENT_PORT
+      protocol: tcp
+      targetPort: 9991
+    - name: collector-stat-s
+      port: COLLECTOR_RECEIVER_GRPC_STAT_PORT
+      protocol: tcp
+      targetPort: 9992
+    - name: collector-span-s
+      port: COLLECTOR_RECEIVER_GRPC_SPAN_PORT
+      protocol: tcp
+      targetPort: 9993
+    - name: collector-base-s
+      port: COLLECTOR_RECEIVER_BASE_PORT
+      protocol: tcp
+      targetPort: 9994
+    - name: collector-stat-u-s
+      port: COLLECTOR_RECEIVER_STAT_UDP_PORT
+      protocol: udp
+      targetPort: 9995
+    - name: collector-span-u-s
+      port: COLLECTOR_RECEIVER_SPAN_UDP_PORT
+      protocol: udp
+      targetPort: 9996
+    - name: collector-stat-t-s
+      port: COLLECTOR_RECEIVER_STAT_UDP_PORT
+      protocol: tcp
+      targetPort: 9995
+    - name: collector-span-t-s
+      port: COLLECTOR_RECEIVER_SPAN_UDP_PORT
+      protocol: tcp
+      targetPort: 9996
+  selector:
+    pinpoint.quickstart.service: pinpoint-quickstart
+
+#todo:1.check if permit same port use different protocol; 2.check if permit use "port name" to point to a port

@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    pinpoint.collector.service: pinpoint-collector
+  name: pinpoint-collector-deployment
+spec:
+  selector:
+    matchLabels:
+      pinpoint.collector.service: pinpoint-collector
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        pinpoint.collector.service: pinpoint-collector
+    spec:
+      containers:
+        - image: pinpointdocker/pinpoint-collector:PINPOINT_VERSION
+          name: pinpoint-collector
+          ImagePolicy: IfNotPresent
+          ports:
+            - name: collector-agent
+              containerPort: 9991
+            - name: ollector-stat
+              containerPort: 9992
+            - name: collector-span
+              containerPort: 9993
+            - name: collector-base
+              containerPort: 9994
+            - name: collector-stat-u
+              containerPort: 9995
+            - name: collector-span-u
+              containerPort: 9996
+
+      restartPolicy: Always
