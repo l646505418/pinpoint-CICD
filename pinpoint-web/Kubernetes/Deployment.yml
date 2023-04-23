@@ -24,7 +24,8 @@ spec:
           ports:
             - name: web-server
               containerPort: 8080
-            - containerPort: 9997
+            - name: server
+              containerPort: 9997
 
 
       restartPolicy: Always
