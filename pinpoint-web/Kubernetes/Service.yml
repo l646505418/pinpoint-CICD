@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    pinpoint.web.service: pinpoint-web
+  name: pinpoint-web-service
+spec:
+  ports:
+    - name: web-server-s
+      port: WEB_SERVER_PORT
+      targetPort: 8080
+    - name: front-port
+      port: 9997
+      targetPort: 9997
+  selector:
+    pinpoint.web.service: pinpoint-web

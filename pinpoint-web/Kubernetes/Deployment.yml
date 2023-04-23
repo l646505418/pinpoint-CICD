@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment.yml
+metadata:
+  labels:
+    pinpoint.web.service: pinpoint-web
+  name: pinpoint-web-deployment
+spec:
+  selector:
+    matchLabels:
+      pinpoint.web.service: pinpoint-web
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        pinpoint.web.service: pinpoint-web
+    spec:
+      containers:
+        - image: pinpointdocker/pinpoint-web:PINPOINT_VERSION
+          name: pinpoint-web
+          imagePullPolicy: IfNotPresent
+          envFrom:
+            - configMapRef:
+                name: pinpoint-web-config
+          ports:
+            - name: web-server
+              containerPort: 8080
+            - containerPort: 9997
+
+
+      restartPolicy: Always

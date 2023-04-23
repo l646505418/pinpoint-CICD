@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    pinpoint.web.service: pinpoint-web
+  name: pinpoint-web-pod
+spec:
+  containers:
+    - image: pinpointdocker/pinpoint-web:PINPOINT_VERSION
+      name: pinpoint-web
+      imagePullPolicy: IfNotPresent
+      envFrom:
+        - configMapRef:
+            name: pinpoint-web-config
+
+
+  restartPolicy: Always
