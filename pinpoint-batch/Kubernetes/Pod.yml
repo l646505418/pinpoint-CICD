@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    pinpoint.batch.service: pinpoint-batch
+  name: pinpoint-batch-pod
+spec:
+  containers:
+    - image: pinpointdocker/pinpoint-batch:PINPOINT_VERSION
+      name: pinpoint-batch
+      imagePullPolicy: IfNotPresent
+      envFrom:
+        - configMapRef:
+            name: pinpoint-batch-config
+  restartPolicy: Always

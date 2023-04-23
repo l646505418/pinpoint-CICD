@@ -17,5 +17,17 @@ spec:
       containers:
         - image: pinpointdocker/pinpoint-agent:PINPOINT_VERSION
           name: pinpoint-agent
-          ImagePolicy: IfNotPresent
+          imagePullPolicy: IfNotPresent
+          envFrom:
+            - configMapRef:
+                name: pinpoint-agent-config
+          volumeMounts:
+            - name: data-volume
+              mountPath: /pinpoint-agent
+
+      volumes:
+        - name: data-volume
+          emptyDir: { }
+
+
       restartPolicy: Always
